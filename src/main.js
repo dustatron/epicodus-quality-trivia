@@ -2,32 +2,38 @@
 import './scss/main.scss';
 import $ from 'jquery';
 import { Quiz } from './quiz';
+import { Api } from './api';
 
-let request = new XMLHttpRequest();
-const url = `https://opentdb.com/api.php?amount=10&category=18&difficulty=easy`;
+// let request = new XMLHttpRequest();
+// const url = `https://opentdb.com/api.php?amount=10&category=18&difficulty=easy`;
 
 $(document).ready(function() {
- let quiz = new Quiz()
+ let quiz = new Quiz();
+ let api = new Api(quiz);
 
-  request.onreadystatechange = function() {
-    if (this.readyState === 4 && this.status === 200) {
-      const response = JSON.parse(this.responseText);
-     response.results.forEach(result=>{
-      const {type,question,correct_answer,incorrect_answers} = result;
-      const tempObj ={
-        type,
-        question,
-        correct_answer,
-        incorrect_answers
-      }
-      quiz.questions.push(tempObj)
-     })
-     console.log(quiz);
-    }
-  }
+ api.call();
 
-  request.open("GET", url, true);
-  request.send();
+ 
+
+  // request.onreadystatechange = function() {
+  //   if (this.readyState === 4 && this.status === 200) {
+  //     const response = JSON.parse(this.responseText);
+  //    response.results.forEach(result=>{
+  //     const {type,question,correct_answer,incorrect_answers} = result;
+  //     const tempObj ={
+  //       type,
+  //       question,
+  //       correct_answer,
+  //       incorrect_answers
+  //     }
+  //     quiz.questions.push(tempObj)
+  //    })
+  //    console.log(quiz);
+  //   }
+  // }
+
+  // request.open("GET", url, true);
+  // request.send();
 
 });
 
