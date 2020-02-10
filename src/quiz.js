@@ -5,4 +5,8 @@ export class Quiz{
      this.answers = [];
      this.timer = 30000;
   }
+
+  checkAnswer() {
+    
+  }
 }
