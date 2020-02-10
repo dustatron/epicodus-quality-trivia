@@ -6,7 +6,14 @@ export class Quiz{
      this.timer = 30000;
   }
 
-  checkAnswer() {
-    
+  setScore() {
+    this.answers.forEach((ans, i)=>{
+      if(ans === this.questions[i].correct_answer){
+        this.score += 1;
+      }
+    });
   }
-}
+
+
+
+} // end class

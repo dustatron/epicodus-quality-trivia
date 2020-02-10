@@ -14,7 +14,7 @@ describe('Quiz', () => {
   });
 });
 
-describe('CheckAnswer', () => {
+describe('setScore', () => {
   let quiz = new Quiz();
   quiz.answers = ["Michael Keaton", "George Clooney", "Val Kilmer"]
 
@@ -46,6 +46,7 @@ describe('CheckAnswer', () => {
   ];
 
   test('should update score by 1', () => {
+    quiz.setScore();
     expect(quiz.score).toEqual(1);
   });
 
