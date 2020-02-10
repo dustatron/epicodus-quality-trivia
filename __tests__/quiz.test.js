@@ -78,9 +78,9 @@ describe('setScore', () => {
     });
   });
 
-  describe('addToAnswers', () => {
+  describe('addAnswers', () => {
     test('should push argument to quiz.answers array', () => {
-      quiz.addToAnswers('Cats');
+      quiz.addAnswers('Cats');
       expect(quiz.answers[quiz.answers.length-1]).toEqual('Cats');
     });
 

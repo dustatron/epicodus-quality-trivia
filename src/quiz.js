@@ -15,8 +15,8 @@ export class Quiz {
   }
 
   //add users answer to this.answer array.
-  addToAnswers(answer) {
-    //push users answer to this.answers array.
+  addAnswers(answer) {
+    this.answers.push(answer);
   }
 
   //create shuffled answer array that includes the right answer. 
