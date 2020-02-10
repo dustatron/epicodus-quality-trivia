@@ -1,15 +1,33 @@
 // import { example } from './example';
 import './scss/main.scss';
 import $ from 'jquery';
+import { Quiz } from './quiz';
+
+let request = new XMLHttpRequest();
+const url = `https://opentdb.com/api.php?amount=10&category=18&difficulty=easy`;
 
 $(document).ready(function() {
-  //get form submit button
-  $('form').submit((event) => {
-    event.preventDefault();
-    let input1 = $('#input-1').val();
-    let input2 = $('#input-2').val();
+ let quiz = new Quiz()
 
-    //print to DOM
-    $('.output').html(input1 + ' ' + input2);
-  });
+  request.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      const response = JSON.parse(this.responseText);
+     response.results.forEach(result=>{
+      const {type,question,correct_answer,incorrect_answers} = result;
+      const tempObj ={
+        type,
+        question,
+        correct_answer,
+        incorrect_answers
+      }
+      
+      quiz.questions.push(tempObj)
+     })
+     console.log(quiz);
+    }
+  }
+
+  request.open("GET", url, true);
+  request.send();
+
 });
