@@ -8,3 +8,12 @@
   .output {
     margin-top: 55px;
   }
+  .btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    div {
+      margin: 10px 0;
+    }
+  }

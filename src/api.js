@@ -1,11 +1,24 @@
+import { thisTypeAnnotation } from "@babel/types";
+
 export class Api {
-  constructor(quiz) {
-    this.quiz = quiz
+  constructor(quiz, numQs ) {
+    this.quiz = quiz;
+    this.numQs =numQs;
+    this.return;
   }
 
   call(){
-    let request = new XMLHttpRequest();
-    const url = `https://opentdb.com/api.php?amount=10&category=18&difficulty=easy`;
+    let promise = new Promise(function(resolve, reject) {
+      let request = new XMLHttpRequest();
+      const url = `https://opentdb.com/api.php?amount=${this.numQs}&category=18&difficulty=easy`;
+
+      request.onload = function() {
+
+      }
+    });
+
+
+    
     request.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
       const response = JSON.parse(this.responseText);
@@ -17,9 +30,9 @@ export class Api {
         correct_answer,
         incorrect_answers
       }
-      this.quiz.questions.push(tempObj)
+      self.quiz.questions.push(tempObj)
      })
-     console.log(this.quiz);
+     console.log(self.quiz);
     }
   }
   
