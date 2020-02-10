@@ -30,6 +30,7 @@ export class Quiz{
   calcPercent() {
     //return this.score divided by this.questions.length 
     // return precentage
+    return 12;
   }
 
   addToAnswers(answer){

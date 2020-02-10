@@ -1,4 +1,5 @@
 import { Quiz } from "../src/quiz";
+import { arrowFunctionExpression } from "@babel/types";
 
 
 describe('Quiz', () => {
@@ -59,7 +60,22 @@ describe('setScore', () => {
     test('should check the length of quiz.questions[0].shuffled.length is 4', () => {
       expect(quiz.questions[0].shuffled.length).toEqual(4);
     });
+
+    test('should include correct answer in shuffled array', () => {
+      expect(quiz.questions[0].shuffled.includes(quiz.questions[0].correct_answer)).toEqual(true);
+    }); 
+
   });
+
+  describe('calcPercent', () => {
+    test ('Should check that calcPercent function returns a number', ()=>{
+      expect(typeof quiz.calcPercent()).toEqual("number");
+    })
+  });
+
+  // describe('addToAnswers', () => {
+
+  // });
 
 });
 
