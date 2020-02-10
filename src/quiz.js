@@ -14,6 +14,26 @@ export class Quiz{
     });
   }
 
+  shuffleAnswers() {
+    //retrun answer list with the correct asnwer mixed in. 
+    //push to questions object in a new key 'shuffled'
+    //once call for all of them. 
+    this.questions.forEach(question=>{
+      let tempArr = [...question.incorrect_answers]
+      tempArr.splice(Math.floor(Math.random()*3), 0, question.correct_answer);
 
+      question.shuffled = tempArr;
+    });
+  }
+
+
+  calcPercent() {
+    //return this.score divided by this.questions.length 
+    // return precentage
+  }
+
+  addToAnswers(answer){
+    //push users answer to this.answers array.
+  }
 
 } // end class

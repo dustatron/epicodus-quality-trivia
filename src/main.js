@@ -20,7 +20,6 @@ $(document).ready(function() {
         correct_answer,
         incorrect_answers
       }
-      
       quiz.questions.push(tempObj)
      })
      console.log(quiz);
@@ -31,3 +30,17 @@ $(document).ready(function() {
   request.send();
 
 });
+
+
+
+// const refreshId = setInterval(
+//   () => {
+//     const properID = CheckReload();
+//     console.log(properID);
+//     if (properID > 0) {
+//       clearInterval(refreshId);
+//     }
+//   },
+//   100
+// );
+// }

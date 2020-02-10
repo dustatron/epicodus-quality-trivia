@@ -14,8 +14,8 @@ describe('Quiz', () => {
   });
 });
 
-describe('setScore', () => {
-  let quiz = new Quiz();
+//global
+let quiz = new Quiz();
   quiz.answers = ["Michael Keaton", "George Clooney", "Val Kilmer"]
 
   quiz.questions = [
@@ -45,9 +45,20 @@ describe('setScore', () => {
     }
   ];
 
+describe('setScore', () => {
+  
+
   test('should update score by 1', () => {
     quiz.setScore();
     expect(quiz.score).toEqual(1);
+  });
+
+
+  describe('shuffleAnswers', () => {
+    quiz.shuffleAnswers();
+    test('should check the length of quiz.questions[0].shuffled.length is 4', () => {
+      expect(quiz.questions[0].shuffled.length).toEqual(4);
+    });
   });
 
 });
