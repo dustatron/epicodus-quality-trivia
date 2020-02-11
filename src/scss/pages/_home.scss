@@ -17,3 +17,74 @@
       margin: 10px 0;
     }
   }
+
+  #question-display {
+    display: none;
+  }
+
+  .end-game {
+    margin: 5rem;
+    display: none;
+  }
+
+  @keyframes pulse {
+
+    25% {
+      transform: scale(1.1);
+      text-shadow: crimson 0px 0px 5px, rgb(255, 35, 79) 0px 0px 10px, rgb(252, 179, 179) 0px 0px 15px, rgb(255, 174, 0) 0px 0px 40px, lightsalmon 0px 0px 50px, gold 0px 0px 75px;
+    }
+    
+    
+    75% {
+      transform: scale(0.9);
+      text-shadow: crimson 0px 0px 5px, rgb(255, 35, 79) 0px 0px 10px, rgb(252, 179, 179) 0px 0px 15px, rgb(255, 187, 0) 0px 0px 20px,   gold 0px 0px 30px;
+    }
+  }
+
+  
+  .pulse{
+    display: inline-block;
+    animation-name: pulse;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px 5px;
+    margin: auto;
+    
+  }
+  .timer {
+    margin: 15px auto;
+    border: 1px dashed rgba(0, 0, 0, 0.205);
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    background: #33333350;
+    text-shadow: crimson 0px 0px 5px, rgb(255, 35, 79) 0px 0px 10px, rgb(252, 179, 179) 0px 0px 15px, gold 0px 0px 20px;
+    box-shadow: inset 2px 3px 15px -6px rgba(0,0,0,0.95);
+
+
+ 
+  }
+
+#total-score {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+
+.single-answer {
+  margin: 20px 0px;
+  padding: 10px;
+
+  &--result {
+    text-align: center;
+    font-weight: 800;
+  }
+}

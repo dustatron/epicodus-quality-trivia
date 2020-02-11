@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" style="display:none;">
     <!-- input form  -->
     <div class="row">
       <div class="col-md-6 offset-md-3 box-decore">
@@ -25,7 +25,9 @@
       </div>
 
       <div class='jumbotron col-md-6 offset-md-3 box-decore' id="question-display">
-        <p id="counter"></p>
+        <div class="timer">
+          <h2 class='pulse' id="counter">00</h2>
+        </div>
         <p id="question">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat, perferendis?</p>
         <div class='btn-container'>
         <div><button class='btn btn-info' id="answer1">a</button> <span>Answer</span> </div>
@@ -39,9 +41,13 @@
     </div>
 
     <!-- output box  -->
-    <div class="row">
+    <div class="row end-game ">
       <div class="col-md-6 offset-md-3">
-        <div class="end-game">Winners</div>
+        <h3 class="text-center" >Your total Score is  </h3>
+        <span id="total-score">--</span>
+      </div>
+      <div class="col-md-6 offset-md-3 answers-container">
+        
       </div>
     </div>
   </div>

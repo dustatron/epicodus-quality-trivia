@@ -1,9 +1,11 @@
 import './scss/main.scss';
 import $ from 'jquery';
 import { Quiz } from './quiz';
+import { Api} from './api';
 
-let first = true;
+
 let quiz = new Quiz();
+
 const showQuestion = (qIndex) => {
   let index = parseInt(qIndex);
 
@@ -19,6 +21,7 @@ const showQuestion = (qIndex) => {
 }
 
 $(document).ready(function () {
+  $('.container').attr('style', '');
   let questionIndex = -1;
   let numQs;
   let counter = quiz.timer;
@@ -42,38 +45,21 @@ $(document).ready(function () {
   $('form').submit(e => {
     e.preventDefault();
     numQs = $('#input-1').val();
-    //API CALL
-    let promise = new Promise(function (resolve, reject) {
-      let request = new XMLHttpRequest();
-      const url = `https://opentdb.com/api.php?amount=${numQs}&category=18&difficulty=easy`;
-      request.onload = function () {
-        if (this.status === 200) {
-          resolve(request.response);
-        } else {
-          reject(Error(request.statusText));
-        }
-      }
-      request.open("GET", url, true);
-      request.send();
-    }); // end promise
-    promise.then(function (response) {
-      let body = JSON.parse(response);
-      body.results.forEach(result => {
-        const { type, question, correct_answer, incorrect_answers } = result;
-        const tempObj = {
-          type,
-          question,
-          correct_answer,
-          incorrect_answers
-        }
-        quiz.questions.push(tempObj); 
-      });
+
+    (async () => {
+      let api = new Api(quiz, numQs);
+      const response = await api.triviaQs();
+      console.log(quiz);
       quiz.shuffleAnswers();
-      countDown()
+      countDown();
       nextTurn();
-    });
+      $('.box-decore').slideUp(); //input box
+      $('#question-display').slideDown(); //question box
+    })();
+
     
   });
+  
   //button clicks
   $('.btn-container').on('click', 'button', event=>{
     quiz.addAnswers(event.target.name)
@@ -81,12 +67,7 @@ $(document).ready(function () {
   });
 
   function nextTurn(){
-    if(first){
-      console.log(quiz.qIndex);
-      showQuestion(quiz.qIndex);
-      counter = quiz.timer;
-      first = false 
-    } else if (quiz.questions.length-1 > quiz.qIndex ) {
+    if (quiz.questions.length > quiz.qIndex ) {
       console.log(quiz.qIndex);
       showQuestion(quiz.qIndex);
       counter = quiz.timer;
@@ -94,8 +75,32 @@ $(document).ready(function () {
     } else {
       quiz.setScore();
       let percent = quiz.calcPercent();
-      $('.end-game').html(percent);
-      console.log('END GAME');
+      endDisplay(percent)
     }
   }
 });
+
+function endDisplay(percent) {
+  $('#total-score').html(`${percent}%`);
+  $('.end-game').slideDown();
+  $('#question-display').fadeOut();
+
+  let answersContainer = $('.answers-container');
+  let printString = "";
+
+  quiz.questions.forEach((questObj, index) => {
+    let answerState = "Wrong";
+    let correctClass = "bg-danger"
+    if(questObj.correct_answer === quiz.answers[index]) {
+      answerState = "Correct";
+      correctClass = "bg-success"
+    } 
+    printString += `<div class="single-answer ${correctClass}"> <div> Q: ${questObj.question} </div> 
+    <div> A: ${questObj.correct_answer} </div>
+    <div class="single-answer--result"> ${answerState}</div>
+    </div>`
+  });
+
+  answersContainer.html(printString);
+
+}
