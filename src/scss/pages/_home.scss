@@ -18,6 +18,10 @@
     }
   }
 
+  .horse-dude {
+    width: 100%;
+  }
+
   #question-display {
     display: none;
   }
@@ -25,6 +29,15 @@
   .end-game {
     margin: 5rem;
     display: none;
+    @include respond(tab-port) {
+      margin: .5rem;
+  }
+
+    &--title{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   @keyframes pulse {
@@ -81,6 +94,10 @@
 .answers-container{
   display: flex;
   flex-flow: row wrap;
+  @include respond(tab-port) {
+    width: 100%;
+}
+
 }
 
 .single-answer {
@@ -88,6 +105,9 @@
   padding: 10px;
   width: 30%;
   height: 12rem;
+  @include respond(tab-port) {
+    width: 100%;
+}
  
 
   &--result {
@@ -100,6 +120,8 @@
     height: 85%;
     border-bottom: 1.5px dashed black;
   }
+
+
 }
 
 .wrong {
@@ -108,4 +130,9 @@
 
 .right {
   background: rgba(0, 255, 0, 0.253);
+}
+
+.end-gif {
+  margin: auto;
+  max-width: 90%;
 }
