@@ -1,6 +1,6 @@
 export default class Gify {
 
-    async getGif(percent) {
+    async getGif(percent, sorry) {
         let level = 'you-tried';
     
         if (percent >= 90) {

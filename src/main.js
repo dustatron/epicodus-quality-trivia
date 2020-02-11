@@ -52,12 +52,18 @@ $(document).ready(function () {
 
     (async () => {
       let api = new Api(quiz, numQs, diff, cat);
-      await api.triviaQs();
-      quiz.shuffleAnswers();
-      countDown();
-      nextTurn();
-      $('.box-decore').slideUp(); //input box
-      $('#question-display').slideDown(); //question box
+      if(await api.triviaQs()){
+
+        quiz.shuffleAnswers();
+        countDown();
+        nextTurn();
+        $('.box-decore').slideUp(); //input box
+        $('#question-display').slideDown(); //question box
+      } else {
+        $('.sorry').slideDown();
+        $('.box-decore').slideUp(); //input box
+      }
+      
     })();
   });
 
