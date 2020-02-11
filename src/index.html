@@ -18,7 +18,7 @@
         <form>
           <div class="form-group">
             <label for="input-1">How many questions do you want to answer?</label>
-            <input type="number" class="form-control" id="input-1" aria-describedby="input">
+            <input type="number" class="form-control" id="input-1" aria-describedby="input" min='1' max='20' required >
           </div>
           <button id="submitBtn" type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
         </form>
@@ -28,16 +28,10 @@
         <div class="timer">
           <h2 class='pulse' id="counter">00</h2>
         </div>
-        <p id="question">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat, perferendis?</p>
         <div class='btn-container'>
-        <div><button class='btn btn-info' id="answer1">a</button> <span>Answer</span> </div>
-        <div><button class='btn btn-info' id="answer2">b</button> <span>Answer</span> </div>
-        <div><button class='btn btn-info' id="answer3">c</button> <span>Answer</span> </div>
-        <div><button class='btn btn-info' id="answer4">d</button> <span>Answer</span> </div>
+        <!--- printing questions and answer buttons --->
         </div>
-        
       </div>
-
     </div>
 
     <!-- output box  -->
@@ -47,7 +41,7 @@
         <span id="total-score">--</span>
       </div>
       <div class="col-md-6 offset-md-3 answers-container">
-        
+        <!-- printing results  -->
       </div>
     </div>
   </div>

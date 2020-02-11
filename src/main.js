@@ -9,15 +9,29 @@ let quiz = new Quiz();
 const showQuestion = (qIndex) => {
   let index = parseInt(qIndex);
 
-  $('#question').html(quiz.questions[index].question);
-  $('#answer1+span').html(quiz.questions[index].shuffled[0]);
-  $('#answer1').attr('name',quiz.questions[index].shuffled[0]);
-  $('#answer2+span').html(quiz.questions[index].shuffled[1]);
-  $('#answer2').attr('name',quiz.questions[index].shuffled[1]);
-  $('#answer3+span').html(quiz.questions[index].shuffled[2]);
-  $('#answer3').attr('name',quiz.questions[index].shuffled[2]);
-  $('#answer4+span').html(quiz.questions[index].shuffled[3]);
-  $('#answer4').attr('name',quiz.questions[index].shuffled[3]);
+  let btnContainer = $('.btn-container');
+  let printString = "";
+
+  printString += `<div> ${quiz.questions[index].question} </div>`;
+
+  quiz.questions[index].shuffled.forEach((answer, index)=>{
+    printString += `<div><button class='btn btn-info' name=${answer}>${String.fromCharCode(index + 65)}</button> <span>${answer}</span> </div>`
+  });
+
+  // $('#question').html(quiz.questions[index].question);
+  // $('#answer1+span').html(quiz.questions[index].shuffled[0]);
+  // $('#answer1').attr('name',quiz.questions[index].shuffled[0]);
+  // $('#answer2+span').html(quiz.questions[index].shuffled[1]);
+  // $('#answer2').attr('name',quiz.questions[index].shuffled[1]);
+
+  // if(quiz.questions[index].type === 'multiple'){
+  // $('#answer3+span').html(quiz.questions[index].shuffled[2]);
+  // $('#answer3').attr('name',quiz.questions[index].shuffled[2]);
+  // $('#answer4+span').html(quiz.questions[index].shuffled[3]);
+  // $('#answer4').attr('name',quiz.questions[index].shuffled[3]);
+  // }
+  
+  btnContainer.html(printString);
 }
 
 $(document).ready(function () {
