@@ -15,7 +15,9 @@ const showQuestion = (qIndex) => {
   printString += `<div> <strong> Q${index +1}: </strong> ${quiz.questions[index].question} </div>`;
 
   quiz.questions[index].shuffled.forEach((answer, index)=>{
-    printString += `<div><button class='btn btn-info' name=${answer}>${String.fromCharCode(index + 65)}</button> <span>${answer}</span> </div>`
+    console.log(answer);
+    
+    printString += `<div><button class='btn btn-info' name="${answer}">${String.fromCharCode(index + 65)}</button> <span>${answer}</span> </div>`
   });
   btnContainer.html(printString);
 }
@@ -67,6 +69,9 @@ $(document).ready(function () {
     nextTurn();
   });
 
+  $('.reset').click(function() {
+    location.reload();
+});
   function nextTurn(){
     if (quiz.questions.length > quiz.qIndex ) {
       console.log(quiz.qIndex);

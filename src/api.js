@@ -15,7 +15,7 @@ export class Api {
         const tempObj = {
           type,
           question,
-          correct_answer,
+          correct_answer: correct_answer.replace(/&#039;/g, "'" ),
           incorrect_answers
         }
         this.quiz.questions.push(tempObj); 
