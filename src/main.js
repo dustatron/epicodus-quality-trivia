@@ -2,7 +2,7 @@ import './scss/main.scss';
 import $ from 'jquery';
 import { Quiz } from './quiz';
 
-
+let first = true;
 let quiz = new Quiz();
 const showQuestion = (qIndex) => {
   let index = parseInt(qIndex);
@@ -36,7 +36,6 @@ $(document).ready(function () {
         clearInterval(interval)
         quiz.addAnswers(' ');
         nextTurn();
-
       }
     },1000)
   }
@@ -82,10 +81,16 @@ $(document).ready(function () {
   });
 
   function nextTurn(){
-    if(quiz.questions.length > questionIndex ) {
-      questionIndex ++;
-      showQuestion(questionIndex);
+    if(first){
+      console.log(quiz.qIndex);
+      showQuestion(quiz.qIndex);
       counter = quiz.timer;
+      first = false 
+    } else if (quiz.questions.length-1 > quiz.qIndex ) {
+      console.log(quiz.qIndex);
+      showQuestion(quiz.qIndex);
+      counter = quiz.timer;
+      quiz.qIndex ++;
     } else {
       quiz.setScore();
       let percent = quiz.calcPercent();

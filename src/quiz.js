@@ -1,5 +1,6 @@
 export class Quiz {
   constructor() {
+    this.qIndex = 0;
     this.questions = [];
     this.score = 0;
     this.answers = [];
