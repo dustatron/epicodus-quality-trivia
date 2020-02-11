@@ -20,6 +20,14 @@
             <label for="input-1">How many questions do you want to answer?</label>
             <input type="number" class="form-control" id="input-1" aria-describedby="input" min='1' max='20' required >
           </div>
+          <div class="form-group">
+              <label for="diff">Select Difficulty</label>
+              <select class="form-control" id="diff">
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
+              </select>
+            </div>
           <button id="submitBtn" type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
         </form>
       </div>
@@ -40,7 +48,7 @@
         <h3 class="text-center" >Your total Score is  </h3>
         <span id="total-score">--</span>
       </div>
-      <div class="col-md-6 offset-md-3 answers-container">
+      <div class="answers-container">
         <!-- printing results  -->
       </div>
     </div>

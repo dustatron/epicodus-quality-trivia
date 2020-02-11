@@ -12,25 +12,11 @@ const showQuestion = (qIndex) => {
   let btnContainer = $('.btn-container');
   let printString = "";
 
-  printString += `<div> ${quiz.questions[index].question} </div>`;
+  printString += `<div> <strong> Q${index +1}: </strong> ${quiz.questions[index].question} </div>`;
 
   quiz.questions[index].shuffled.forEach((answer, index)=>{
     printString += `<div><button class='btn btn-info' name=${answer}>${String.fromCharCode(index + 65)}</button> <span>${answer}</span> </div>`
   });
-
-  // $('#question').html(quiz.questions[index].question);
-  // $('#answer1+span').html(quiz.questions[index].shuffled[0]);
-  // $('#answer1').attr('name',quiz.questions[index].shuffled[0]);
-  // $('#answer2+span').html(quiz.questions[index].shuffled[1]);
-  // $('#answer2').attr('name',quiz.questions[index].shuffled[1]);
-
-  // if(quiz.questions[index].type === 'multiple'){
-  // $('#answer3+span').html(quiz.questions[index].shuffled[2]);
-  // $('#answer3').attr('name',quiz.questions[index].shuffled[2]);
-  // $('#answer4+span').html(quiz.questions[index].shuffled[3]);
-  // $('#answer4').attr('name',quiz.questions[index].shuffled[3]);
-  // }
-  
   btnContainer.html(printString);
 }
 
@@ -59,9 +45,10 @@ $(document).ready(function () {
   $('form').submit(e => {
     e.preventDefault();
     numQs = $('#input-1').val();
+    let diff = $('#diff').val().toLowerCase();
 
     (async () => {
-      let api = new Api(quiz, numQs);
+      let api = new Api(quiz, numQs, diff);
       const response = await api.triviaQs();
       console.log(quiz);
       quiz.shuffleAnswers();
@@ -104,13 +91,14 @@ function endDisplay(percent) {
 
   quiz.questions.forEach((questObj, index) => {
     let answerState = "Wrong";
-    let correctClass = "bg-danger"
+    let correctClass = "wrong"
     if(questObj.correct_answer === quiz.answers[index]) {
       answerState = "Correct";
-      correctClass = "bg-success"
+      correctClass = "right"
     } 
-    printString += `<div class="single-answer ${correctClass}"> <div> Q: ${questObj.question} </div> 
-    <div> A: ${questObj.correct_answer} </div>
+    printString += `<div class="single-answer ${correctClass}"> <div class="single-answer--top"> <div><strong> Q${index + 1}:</strong> ${questObj.question} </div> 
+    <div><strong> A: </strong>${questObj.correct_answer} </div>
+    </div>
     <div class="single-answer--result"> ${answerState}</div>
     </div>`
   });
