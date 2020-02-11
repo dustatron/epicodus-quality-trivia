@@ -3,9 +3,9 @@ export class Quiz {
     this.questions = [];
     this.score = 0;
     this.answers = [];
-    this.timer = 30000;
+    this.timer = 30;
   }
-
+//we dont need the timer......
   setScore() {
     this.answers.forEach((ans, i) => {
       if (ans === this.questions[i].correct_answer) {
@@ -31,6 +31,7 @@ export class Quiz {
 
   //return percentage of right answers.
   calcPercent() {
+    console.log('score', this.score, 'the answers', this.answers, 'the quesitons', this.questions );
     return Math.floor((this.score / this.questions.length) * 100);
   }
 

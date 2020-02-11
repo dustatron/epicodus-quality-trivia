@@ -6,7 +6,6 @@ import { Quiz } from './quiz';
 let quiz = new Quiz();
 const showQuestion = (qIndex) => {
   let index = parseInt(qIndex);
-  console.log(quiz.questions[index].shuffled);
 
   $('#question').html(quiz.questions[index].question);
   $('#answer1+span').html(quiz.questions[index].shuffled[0]);
@@ -20,8 +19,27 @@ const showQuestion = (qIndex) => {
 }
 
 $(document).ready(function () {
-  let questionIndex = 0;
+  let questionIndex = -1;
   let numQs;
+  let counter = quiz.timer;
+  let interval;
+  function countDown(){
+    interval = setInterval(()=>{
+      $('#counter').text(counter)
+      counter--
+      if(counter === 0 ){
+        clearInterval(interval)
+        quiz.addAnswers(' ');
+        countDown();
+        nextTurn();
+      }else if(questionIndex===quiz.questions.length){
+        clearInterval(interval)
+        quiz.addAnswers(' ');
+        nextTurn();
+
+      }
+    },1000)
+  }
   $('form').submit(e => {
     e.preventDefault();
     numQs = $('#input-1').val();
@@ -52,41 +70,27 @@ $(document).ready(function () {
         quiz.questions.push(tempObj); 
       });
       quiz.shuffleAnswers();
+      countDown()
       nextTurn();
     });
+    
   });
   //button clicks
   $('.btn-container').on('click', 'button', event=>{
     quiz.addAnswers(event.target.name)
     nextTurn();
-    console.log(quiz)
   });
 
   function nextTurn(){
     if(quiz.questions.length > questionIndex ) {
       questionIndex ++;
-      showQuestion(questionIndex - 1);
+      showQuestion(questionIndex);
+      counter = quiz.timer;
     } else {
-      console.log('winner winner winner');
+      quiz.setScore();
+      let percent = quiz.calcPercent();
+      $('.end-game').html(percent);
+      console.log('END GAME');
     }
   }
 });
-
-
-// const timer = setInterval(() => {
-  
-// });
-
-
-
-// const refreshId = setInterval(
-//   () => {
-//     const properID = CheckReload();
-//     console.log(properID);
-//     if (properID > 0) {
-//       clearInterval(refreshId);
-//     }
-//   },
-//   100
-// );
-// }
