@@ -3,6 +3,7 @@
     margin-top: 55px;
     padding: 25px;    
     box-shadow: 1px 1px 15px -4px rgba(0,0,0,.2);
+    overflow: hidden;
   }
   
   .output {
@@ -16,9 +17,32 @@
     div {
       margin: 10px 0;
     }
+
   }
 
+  @keyframes marquee{
+    0% {
+      transform: translateX(-200%)
+    }
+
+    30% {
+      transform: translateX(0)
+    }
+
+    70% {
+      transform: translateX(2%)
+    }
+    
+    100% {
+      transform: translateX(150%)
+    }
+  }
+  
   .horse-dude {
+    animation-name: marquee;
+    animation-duration: 5s;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-iteration-count: infinite;
     width: 100%;
   }
 

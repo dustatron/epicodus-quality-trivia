@@ -2,7 +2,7 @@ import './scss/main.scss';
 import $ from 'jquery';
 import { Quiz } from './quiz';
 import { Api } from './api';
-import Gify from './gify'
+import Gify from './gify';
 
 
 let quiz = new Quiz();
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     (async () => {
       let api = new Api(quiz, numQs, diff, cat);
-      if(await api.triviaQs()){
+      if (await api.triviaQs()) {
 
         quiz.shuffleAnswers();
         countDown();
@@ -63,7 +63,7 @@ $(document).ready(function () {
         $('.sorry').slideDown();
         $('.box-decore').slideUp(); //input box
       }
-      
+
     })();
   });
 
@@ -88,8 +88,7 @@ $(document).ready(function () {
       (async () => {
         let gify = new Gify();
         let image = await gify.getGif(percent);
-        console.log(image);
-        $('.end-gif').attr('src', image );
+        $('.end-gif').attr('src', image);
       })();
     }
   }

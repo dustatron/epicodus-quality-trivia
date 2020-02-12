@@ -27,7 +27,7 @@ export class Api {
         return body;
       }
     } catch (error) {
-      console.log("ERROR ERROR!" + error.message);
+      console.error("ERROR ERROR!" + error.message);
     }
   }
 
